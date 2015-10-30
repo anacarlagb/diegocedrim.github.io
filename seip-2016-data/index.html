@@ -1,1 +1,188 @@
-It Works.
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Does refactoring improve software structural quality? A longitudinal study of 25 projects">
+    <meta name="author" content="Diego Cedrim">
+
+    <title>Does refactoring improve software structural quality? A longitudinal study of 25 projects</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="grid.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="page-header">
+        <h1>Does refactoring improve software structural quality?</h1>
+        <h3>A longitudinal study of 25 projects</h3>
+      </div>
+
+      <p>This website contains all data not presented in the paper due to space restrictions.</p>
+
+      <h3>Downloads</h3>
+      <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Artefact</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td> <a href="download/projects.xlsx" target="_blank">Projects Analyzed</a></td>
+          <td> Name, URL, number of versions and LOC of all analyzed projects. We provide the date and hash of the last commit analyzed. </td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td> <a href="download/classification-by-project.xlsx" target="_blank">Classification by Project</a></td>
+          <td> Refactoring classification grouped by project.</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td> <a href="https://github.com/diegocedrim/RefDetector" target="_blank">Ref-Detector</a></td>
+          <td> Ref-Detector version used to collect refactoring edits during data collection phase.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr/>
+
+    <h3>Thresholds</h3>
+    <p>The following table presents all thresholds used during code smell detection phase. We used two thresholds sets: optimistic and pessimistic.</p>
+
+
+    <table class="table table-striped">
+      <caption>Pessimistic thresholds.</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Code Smell</th>
+          <th>Rule</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td> Long Method</td>
+          <td> (LOC &gt; 50) and (CC &gt; 5)	 </td>
+        </tr>
+         <tr>
+          <th scope="row">2</th>
+          <td> Shotgun Surgery</td>
+          <td> (CC &gt; 4) and (FanOut &gt; 7) 	 </td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td> Feature Envy</td>
+          <td> (CC &gt; 4) and (FanOut &gt; 4) and (LCOM &lt; 30%) 	 </td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td> Divergent Change:</td>
+          <td> (FanIn &gt; 10) and (LCOM &lt; 50%) and (CC &gt; 4) 	 </td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td> God Class</td>
+          <td> [(LOC &gt; 150) and (CBO &gt; 6)]  or [(NOM &gt; 15) and (CBO &gt; 6)]  </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-striped">
+      <caption>Optimistic thresholds.</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Code Smell</th>
+          <th>Rule</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td> Long Method</td>
+          <td> (LOC &gt; 50) and (CC &gt; 3)	 </td>
+        </tr>
+         <tr>
+          <th scope="row">2</th>
+          <td> Shotgun Surgery</td>
+          <td> (CC &gt; 3) and (FanOut &gt; 4) 	 </td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td> Feature Envy</td>
+          <td> (CC &gt; 3) and (FanOut &gt; 3) and (LCOM &lt; 50%) 	 </td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td> Divergent Change:</td>
+          <td> (FanIn &gt; 5) and (LCOM &lt; 60%) and (CC &gt; 3) 	 </td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td> God Class</td>
+          <td> [(LOC &gt; 150) and (CBO &gt; 6)]  or [(NOM &gt; 15) and (CBO &gt; 6)]  </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr/>
+
+    <h3>Authors</h3>
+
+    <p>Any question/suggestion please contact the authors of this work.</p>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>E-mail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Diego Cedrim</td>
+          <td>dcgrego@inf.puc-rio.br</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Leonardo Sousa</td>
+          <td>lsousa@inf.puc-rio.br</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Alessandro Garcia</td>
+          <td>afgarcia@inf.puc-rio.br</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Rohit Gheyi</td>
+          <td>rohit@dsc.ufcg.edu.br</td>
+        </tr>
+      </tbody>
+    </table>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
+

@@ -1,4 +1,4 @@
 # diegocedrim.github.io
 
-Experiment data of the paper entitled: "On the Interference of Refactoring on Code Smells: An Exploratory Study"
+Experiment data of the paper entitled: "Does refactoring improve software structural quality? A longitudinal study of 25 projects"
 

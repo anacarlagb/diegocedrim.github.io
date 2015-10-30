@@ -1,0 +1,24 @@
+{
+  "name": "seip-2016-data-cedrim-et-al",
+  "version": "0.1.0",
+  "authors": [
+    "Diego Cedrim <diego.cedrim@gmail.com>"
+  ],
+  "description": "Experiment data of the paper entitled: On the Interference of Refactoring on Code Smells: An Exploratory Study",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "seip",
+    "software engineering"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
