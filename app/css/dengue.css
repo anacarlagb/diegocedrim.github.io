@@ -1,0 +1,24 @@
+.vote-up {
+    color: rgba(0, 133, 0, 1);
+}
+
+.vote-up-disabled {
+    color: rgb(191, 191, 191);
+}
+
+.vote-up-disabled:hover {
+    color: rgba(0, 133, 0, 1);
+}
+
+.vote-down {
+    color: rgba(185, 44, 40, 1);
+}
+
+.vote-down-disabled {
+    color: rgb(191, 191, 191);
+}
+
+.vote-down-disabled:hover {
+    color: rgba(185, 44, 40, 1);
+}
+

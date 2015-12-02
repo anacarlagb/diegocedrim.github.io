@@ -1,0 +1,195 @@
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="../map.html"> {{ 'GENERAL.HOME' | translate }}</a></li>
+        <li>{{ 'POI.POI' | translate }}</li>
+        <li class="active">{{ 'POI.VIEW' | translate }}</li>
+    </ul>
+</div>
+
+<div class="grey-container shortcut-wrapper">
+
+    <a class="btn btn-sm btn-default" fb-share="" ng-attr-link="{{getPoiShareUrl(poi)}}" >
+        <i class="fa fa-facebook"></i> {{ 'GENERAL.SHARE' | translate }}
+    </a>
+
+    <a class="btn btn-sm btn-default" tweet=""
+       ng-attr-link="https://twitter.com/intent/tweet?text={{'POI.TWEET_TEXT' | translate}}&url={{getPoiShareUrl(poi)}}&hashtags=DengueReport">
+        <i class="fa fa-twitter"></i>  {{ 'GENERAL.TWEET' | translate }}
+    </a>
+
+    <a class="btn btn-sm btn-default"><i class="fa fa-flag"></i> {{ 'POI.REPORT' | translate }}</a>
+</div>
+
+<google-maps-point-chooser  style="width: 100%; height: 300px; padding-top: 20px;" data-insert-on-my-scope="true">
+
+</google-maps-point-chooser>
+
+<div class="grey-container shortcut-wrapper" ng-if="hasAuthenticatedUser()">
+    <a class="btn btn-sm btn-default" ng-click="sendVote(true,poi)" ng-if="poi.userVote.up">
+        <i class="fa fa-thumbs-up vote-up"></i>     {{poi.upVoteCount}}
+    </a>
+    <a class="btn btn-sm btn-default" ng-click="sendVote(true,poi)" ng-if="!poi.userVote || !poi.userVote.up">
+        <i class="fa fa-thumbs-up vote-up-disabled"></i> {{poi.upVoteCount}}
+    </a>
+    <a class="btn btn-sm btn-default" ng-click="sendVote(false,poi)" ng-if="poi.userVote.up === false">
+        <i class="fa fa-thumbs-down vote-down"></i> {{poi.downVoteCount}}
+    </a>
+    <a class="btn btn-sm btn-default" ng-click="sendVote(false,poi)" ng-if="!poi.userVote || poi.userVote.up">
+        <i class="fa fa-thumbs-down vote-down-disabled"></i> {{poi.downVoteCount}}
+    </a>
+</div>
+
+<div class="grey-container shortcut-wrapper" ng-if="!hasAuthenticatedUser()">
+    <i class="fa fa-thumbs-up vote-up"></i>     {{poi.upVoteCount}}
+    <i class="fa fa-thumbs-up vote-down"></i> {{poi.downVoteCount}}
+</div>
+
+<div class="container-fluid" style="padding-top: 10px;">
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="panel panel-default" style="min-height: 211px; max-height:211px; overflow-y: auto;">
+                <div class="panel-heading">
+                    {{ 'POI.BASIC_DATA' | translate }}
+                </div>
+                <table class="table table-hover table-striped">
+                    <tbody>
+                    <tr>
+                        <td>{{ 'POI.BRIEF_DESCRIPTION' | translate }}</td>
+                        <td>
+                            {{poi.title}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'POI.COMPLETE_DESCRIPTION' | translate }}</td>
+                        <td>
+                            {{poi.description}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'POI.DATE' | translate }}</td>
+                        <td>
+                            {{poi.date | date:'fullDate'}} {{poi.date | date:'mediumTime'}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'POI.TYPE' | translate }}</td>
+                        <td>
+                            {{poi.type.name}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'POI.PUBLISHED_BY' | translate }}</td>
+                        <td ng-if="poi.user != null">
+                            {{poi.user.name}}
+                        </td>
+                        <td ng-if="poi.user == null">
+                            {{ 'GENERAL.ANONYMOUS' | translate }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default" style="min-height: 211px; max-height:211px; overflow-y: auto;">
+                <div class="panel-heading">
+                    {{ 'POI.ADDITIONAL_INFO' | translate }}
+                </div>
+                <table class="table table-hover table-striped">
+                    <tbody>
+                    <tr ng-repeat="fieldValue in poi.fieldValues">
+                        <td>{{fieldValue.field.name}}</td>
+                        <td>
+                            {{fieldValue.value}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="panel panel-default" style="min-height: max-height:500px; overflow-y: auto;">
+                <div class="panel-heading">
+                    {{ 'POI.PICTURES' | translate }}
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center" ng-repeat="pic in poi.pictures">
+                            <a href="#" onClick="return false;" class="thumbnail pull-left relative" ng-click="startGallery($index)">
+                                <img alt="150x150" style="width: 150px; height: 150px;" ng-src="{{getThumbUrl(pic, 150)}}">
+                            </a>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6" ng-controller="PoiCommentController">
+
+            <div class="panel panel-default" >
+                <div class="panel-heading">
+                    {{ 'GENERAL.COMMENTS' | translate }}
+                </div>
+                <div class="panel-body" style="max-height:500px; overflow-y: auto;">
+                    <div class="media" ng-repeat="c in comments">
+                        <div class="media-body">
+                            <strong>{{c.user.name}}</strong>
+                            <small class="pull-right text-muted"><i class="fa fa-clock-o"></i>
+                                    {{c.date | date:'fullDate'}} {{c.date | date:'shortTime'}}
+                            </small>
+                            <p>
+                                {{c.text}}
+                            </p>
+                        </div>
+                        <div class="media-bottom" ng-if="!hasAuthenticatedUser()">
+                            {{c.upVoteCount}} <i class="fa fa-thumbs-up vote-up"></i>
+                            {{c.downVoteCount}} <i class="fa fa-thumbs-down vote-down"></i>
+                        </div>
+                        <div class="media-bottom" ng-if="hasAuthenticatedUser()">
+
+                            {{c.upVoteCount}}
+                            <a href="#" onclick="return false;" ng-click="sendVote(true,c)" ng-if="c.userVote.up">
+                                <i class="fa fa-thumbs-up vote-up"></i>
+                            </a>
+                            <a href="#" onclick="return false;" ng-click="sendVote(true,c)" ng-if="!c.userVote || !c.userVote.up">
+                                <i class="fa fa-thumbs-up vote-up-disabled"></i>
+                            </a>
+
+                            {{c.downVoteCount}}
+                            <a href="#" onclick="return false;" ng-click="sendVote(false,c)" ng-if="c.userVote.up === false">
+                                <i class="fa fa-thumbs-down vote-down"></i>
+                            </a>
+                            <a href="#" onclick="return false;" ng-click="sendVote(false,c)" ng-if="!c.userVote || c.userVote.up">
+                                <i class="fa fa-thumbs-down vote-down-disabled"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer" ng-if="hasAuthenticatedUser()">
+                    <input type="text"
+                           class="form-control input-sm"
+                           ng-model="comment.text"
+                           ng-enter="sendComment()"
+                           placeholder="{{ 'GENERAL.COMMENTS_PLACEHOLDER' | translate }}" />
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<photo-swipe-canvas></photo-swipe-canvas>

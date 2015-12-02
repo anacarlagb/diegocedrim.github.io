@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="clearfix">
+            <strong class="block" ng-if="poi.user != null">{{poi.user.name}}</strong>
+            <strong class="block" ng-if="poi.user == null">{{ 'GENERAL.ANONYMOUS' | translate }}</strong>
+            <small class="text-muted">{{poi.date | date:'fullDate'}}</small>
+        </div>
+        <div class="seperator"></div>
+        <p>
+            <strong>{{poi.title}}</strong>
+        </p>
+        <p>
+            {{poi.description}}
+        </p>
+        <a class="btn btn-default btn-xs"  ng-href="#/poi/{{poi.id}}/view"><i class="fa fa-search"></i> {{ 'GENERAL.DETAILS' | translate }}</a>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-4 text-center" ng-repeat="pic in poi.pictures | limitTo:3">
+                <img class="thumbnail pull-left relative" alt="150x150" ng-src="{{getThumbUrl(pic, 100, 100)}}" style="width: 100px; height: 100px;"/>
+            </div><!-- /.col -->
+        </div>
+    </div>
+</div>

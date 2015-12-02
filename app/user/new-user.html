@@ -1,0 +1,94 @@
+<div id="breadcrumb">
+    <ul class="breadcrumb">
+        <li><i class="fa fa-home"></i><a href="../map.html"> {{ 'GENERAL.HOME' | translate }}</a></li>
+        <li>{{ 'USER.USERS' | translate }}</li>
+        <li class="active">{{ 'USER.NEW' | translate }}</li>
+    </ul>
+</div>
+
+<div class="padding-md">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{ 'USER.CREATE_TEXT' | translate }}</div>
+                <div class="panel-body">
+                    <form name="userForm" ng-submit="add()">
+
+                        <div ng-class="(userForm.name.$dirty && !userForm.name.$valid)? 'form-group has-error' : 'form-group'">
+                            <label for="inputName">{{ 'USER.NAME' | translate }}</label>
+                            <input id="inputName" type="text" class="form-control input-sm" ng-model="user.name" name="name" required>
+                            <span class="help-block" ng-if="userForm.name.$dirty && userForm.name.$error.required">
+                                {{ 'ERRORS.REQUIRED' | translate }}
+                            </span>
+                        </div><!-- /form-group -->
+
+                        <div ng-class="(userForm.email.$dirty && !userForm.email.$valid)? 'form-group has-error' : 'form-group'">
+                            <label for="inputEmail">{{ 'USER.EMAIL' | translate }}</label>
+                            <input id="inputEmail" type="email" class="form-control input-sm" ng-model="user.username" name="email" required single-username>
+                            <span class="help-block" ng-if="userForm.email.$dirty && userForm.email.$error.required">
+                                {{ 'ERRORS.REQUIRED' | translate }}
+                            </span>
+                            <span class="help-block" ng-if="userForm.email.$dirty && userForm.email.$error.email">
+                                {{ 'ERRORS.EMAIL' | translate }}
+                            </span>
+                            <span class="help-block" ng-if="userForm.email.$dirty && userForm.email.$error.unique">
+                                {{ 'ERRORS.DUPLICATED_EMAIL' | translate }}
+                            </span>
+                             <span class="help-block" ng-if="userForm.email.$dirty && userForm.email.$error.uniquePending">
+                                {{ 'USER.CHECKING_EMAIL' | translate }}
+                            </span>
+                        </div>
+
+                        <div ng-class="(userForm.password.$dirty && !userForm.password.$valid)? 'form-group has-error' : 'form-group'">
+                            <label for="inputPassword">{{ 'USER.PASSWORD' | translate }}</label>
+                            <input id="inputPassword" type="password" class="form-control input-sm"
+                                   ng-model="user.password"
+                                   name="password"
+                                   ng-minlength="8"
+                                   ng-maxlength="20"
+                                   ng-pattern="string"
+                                   required>
+                            <span class="help-block" ng-if="userForm.password.$dirty && userForm.password.$error.required">
+                                {{ 'ERRORS.REQUIRED' | translate }}
+                            </span>
+                            <span class="help-block" ng-if="userForm.password.$dirty && userForm.password.$error.minlength">
+                                {{ 'USER.PASSWORD_LEN_MIN_ERROR' | translate }}
+                            </span>
+                            <span class="help-block" ng-if="userForm.password.$dirty && userForm.password.$error.maxlength">
+                                {{ 'USER.PASSWORD_LEN_MAX_ERROR' | translate }}
+                            </span>
+                        </div>
+
+                        <div ng-class="(userForm.confirmation.$dirty && !userForm.confirmation.$valid)? 'form-group has-error' : 'form-group'">
+                            <label for="inputConfirmation">{{ 'USER.CONFIRMATION' | translate }}</label>
+                            <input id="inputConfirmation" type="password" class="form-control input-sm"
+                                   ng-model="confirmation"
+                                   name="confirmation"
+                                   password-confirmation="user.password"
+                                   placeholder="{{ 'USER.CONFIRMATION_PLACEHOLDER' | translate }}"
+                                   required>
+                            <span class="help-block" ng-if="userForm.confirmation.$dirty && userForm.confirmation.$error.passwordConfirmation">
+                                {{ 'USER.CONFIRMATION_ERROR' | translate }}
+                            </span>
+                            <span class="help-block" ng-if="userForm.confirmation.$dirty && userForm.confirmation.$error.required">
+                                {{ 'ERRORS.REQUIRED' | translate }}
+                            </span>
+                        </div>
+
+                        <button type="submit" ng-disabled="userForm.$invalid" class="btn btn-success btn-sm">{{ 'USER.SIGN_UP' | translate }}</button>
+                    </form>
+                </div>
+            </div><!-- /panel -->
+        </div><!-- /.col -->
+        <div class="col-md-6">
+            <div class="panel panel-default" ng-controller="FacebookLoginController">
+                <div class="panel-heading">{{ 'USER.CREATE_SOCIAL_TEXT' | translate }}</div>
+                <div class="panel-body" style="text-align: center">
+                    <a href="#" class="btn btn-lg btn-default" onClick="return false;" ng-click="facebookLogin()">
+                        <i class="fa fa-facebook"></i> {{ 'GENERAL.FB' | translate }}
+                    </a>
+                </div>
+            </div><!-- /panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div>
