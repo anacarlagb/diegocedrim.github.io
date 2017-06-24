@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="The " Dark Side " of Code Refactoring">
+    <meta name="description" content="Understanding the Impact of Refactoring on Smells">
     <meta name="author" content="Diego Cedrim">
 
-    <title>The "Dark Side" of Code Refactoring</title>
+    <title>Understanding the Impact of Refactoring on Smells</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -72,6 +72,8 @@
                     <li><a href="#root_floss">Root/Floss</a></li>
                     <li><a href="#downloads">Downloads</a></li>
                     <li><a href="#thresholds">Rules</a></li>
+                    <li><a href="#patterns_threshold_tuning">Patterns</a></li>
+                    <li><a href="#authors">Authors</a></li>
                     <li><a href="#references">References</a></li>
                 </ul>
             </div>
@@ -83,19 +85,21 @@
     <div class="container">
 
         <div class="page-header" id="title">
-            <h1>The "Dark Side" of Code Refactoring<br/><small>Revealing When Refactoring Stinks</small></h1>
+            <h1>Understanding the Impact of Refactoring on Smells<br/><small>A Longitudinal Study of 23 Software Projects</small></h1>
         </div>
         This website contains complementary data to the submitted paper.
 
         <h3 class="page-header" id="abstract">Abstract</h3>
 
-        <p class="text-justify">Code smells in a program represent indications of structural quality problems, which can be addressed by software refactoring. There is an explicit assumption that software refactoring improves the structural quality of a program by reducing its
-            density of code smells. However, little has been reported about whether and to what extent developers neglect or end up creating code smells through refactoring. This paper reports a longitudinal study intended to address this gap. We analyze
-            how often commonly-used refactoring types affect the density of 13 types of code smells along the version histories of 23 projects. Our findings are based on the analysis of 16,566 refactorings distributed in 10 different types. Even though
-            79.4% of the refactorings touched smelly elements, 57% did not reduce their occurrences. Surprisingly, only 9.7% of refactorings removed smells, while 33.3% induced the introduction of new ones. More than 95% of such refactoring-induced smells
-            were not removed in successive commits, which suggest refactorings tend to more frequently introduce long-living smells instead of eliminating existing ones. We also characterized and quantified typical refactoring-smell patterns, and observed
-            that certain harmful patterns are very frequent, including (but not limited to): (i) approximately 30% of the Move Method and Pull Up Method tended to induce the emergence of God Class in the target classes without removing smells in the source
-            classes, and (ii) the Extract Superclass refactoring creates the code smell Speculative Generality in 68% of the cases.</p>
+        <p class="text-justify">
+            Code smells in a program represent indications of structural quality problems, which can be addressed by software refactoring. However, refactoring intends to achieve different goals in practice, and its application may not reduce smelly structures. Developers
+            may neglect or end up creating new code smells through refactoring. Unfortunately, little has been reported about the beneficial and harmful effects of refactoring on code smells. This paper reports a longitudinal study intended to address
+            this gap. We analyze how often commonly-used refactoring types affect the density of 13 types of code smells along the version histories of 23 projects. Our findings are based on the analysis of 16,566 refactorings distributed in 10 different
+            types. Even though 79.4% of the refactorings touched smelly elements, 57% did not reduce their occurrences. Surprisingly, only 9.7% of refactorings removed smells, while 33.3% induced the introduction of new ones. More than 95% of such refactoring-induced
+            smells were not removed in successive commits, which suggest refactorings tend to more frequently introduce long-living smells instead of eliminating existing ones. We also characterized and quantified typical refactoring-smell patterns, and
+            observed that harmful patterns are frequent, including: (i) approximately 30% of the Move Method and Pull Up Method refactorings induced the emergence of God Class, and (ii) the Extract Superclass refactoring creates the smell Speculative
+            Generality in 68% of the cases.
+        </p>
 
         <h3 class="page-header" id="examples">Motivating Examples</h3>
 
@@ -398,7 +402,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Artefact</th>
+                                    <th width="20%">Artefact</th>
                                     <th>Description</th>
                                 </tr>
                             </thead>
@@ -416,7 +420,10 @@
                                 <tr>
                                     <th scope="row">3</th>
                                     <td> <a href="download/non-removal-patterns.xlsx" target="_blank">Non-Removal Patterns</a></td>
-                                    <td> Complete list of non-removal patterns</td>
+                                    <td>
+                                        This file contains the complete list of non-removal patterns. It includes a table with four columns. The first one (ref_name) contains the Refactoring Type. The second one (smell_name), the code smell type. The third column (touches) presents the number
+                                        of times the refactoring type reported in the first column was applied in system elements containing the smell of the second column. The fourth column (all_refs) presents the number of times that we observed the
+                                        referred refactoring type in our entire dataset. The last column presents the percentage (touches/all_refs). </td>
                                 </tr>
 
                             </tbody>
@@ -578,7 +585,74 @@
                             </tbody>
                         </table>
 
-                        <h3 class="page-header" id="references" id="references">References</h3>
+                        <h3 class="page-header" id="patterns_threshold_tuning">Patterns Threshold Tuning</h3>
+
+                        <p class="text-justify">The threshold of 15% was selected for the following reason: (i) most of the refactoring types occur at least 10 times in each project of our dataset, and (ii) if a refactoring-smell pattern occur more than once (e.g. 1,5 times)
+                            in each project (in average), we consider that there is a non-ignorable chance the pattern occurrence is not accidental. In fact, we observed that several refactoring-smell patterns (with a frequency higher than 15%) occur
+                            more than once in several projects. We added this explanation in the companion website. Unfortunately, we have no space left to add this in the paper.</p>
+
+                        <h3 class="page-header" id="authors">Authors</h3>
+
+                        <p>Any question/suggestion please contact the authors of this work.</p>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>E-mail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Diego Cedrim</td>
+                                    <td>dcgrego@inf.puc-rio.br</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Alessandro Garcia</td>
+                                    <td>afgarcia@inf.puc-rio.br</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Melina Mongiovi</td>
+                                    <td>melina@copin.ufcg.edu.br</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Rohit Gheyi</td>
+                                    <td>rohit@dsc.ufcg.edu.br</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>Leonardo Sousa</td>
+                                    <td>lsousa@inf.puc-rio.br</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
+                                    <td>Rafael de Mello</td>
+                                    <td>rmaiani@inf.puc-rio.br</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">7</th>
+                                    <td>Baldoino Fonseca</td>
+                                    <td>baldoino@ic.ufal.br</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">8</th>
+                                    <td>Márcio Ribeiro</td>
+                                    <td>marcio@ic.ufal.br</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">9</th>
+                                    <td>Alexander Chávez</td>
+                                    <td>alopez@inf.puc-rio.br</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="page-header" id="references">References</h3>
 
                         <p class="text-justify"><strong>[1]</strong> M. Fowler, K. Beck, J. Brant, W. Opdyke, and D. Roberts, <a target="_blank" href="http://dl.acm.org/citation.cfm?id=311424">Refactoring: Improving the Design of Existing Code</a>, 1 edition. Boston, MA, USA:
                             Addison-Wesley Longman Publishing Co., Inc., 1999.</p>
